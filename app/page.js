@@ -24,8 +24,27 @@ export default function Page() {
 
   // Temporary UI placeholder 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Users Dashboard</h1>
-    </div>
+    <main className="max-w-3xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">Users Dashboard</h1>
+  
+      {isLoading && (
+        <div className="flex justify-center p-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-4 border-blue-500 border-t-transparent"></div>
+        </div>
+      )}
+  
+      {error && <p className="text-red-500">{error}</p>}
+  
+      {!isLoading && !error && (
+        <ul>
+          {users.map((user) => (
+            <li key={user.id} className="mb-4 border rounded p-4 shadow">
+              <p className="font-semibold">{user.name}</p>
+              <p className="text-gray-600">{user.email}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </main>
   );
 }
